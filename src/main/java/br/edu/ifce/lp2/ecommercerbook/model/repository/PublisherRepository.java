@@ -13,6 +13,7 @@ public class PublisherRepository {
     public PublisherRepository(){
         data = new HashMap<>();
     }
+
     public void create(Publisher publisher){
         publisher.setId(ids);
         data.put(ids, publisher);
@@ -29,5 +30,9 @@ public class PublisherRepository {
 
     public void delete(Long id){
         data.remove(id);
+    }
+
+    public Publisher getById(Long id){
+        return data.get(id);
     }
 }
