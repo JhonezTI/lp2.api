@@ -13,7 +13,7 @@ public class PublisherService {
         var allPublishers = repository.getAll();
         if(!isExists(publisher)){repository.create(publisher);}
     }
-
+////te
     private boolean isExists(Publisher publisher) {
         return repository
                 .getAll()
