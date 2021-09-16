@@ -4,7 +4,6 @@ import br.edu.ifce.lp2.ecommercerbook.model.entities.Publisher;
 import br.edu.ifce.lp2.ecommercerbook.model.repository.PublisherRepository;
 import java.util.Collection;
 import java.util.Locale;
-import java.util.stream.Stream;
 
 public class PublisherService {
 
@@ -15,7 +14,7 @@ public class PublisherService {
         if(!isExists(publisher)){repository.create(publisher);}
     }
 
-    private boolean isExists(Publisher publisher, Stream<Publisher> stream) {
+    private boolean isExists(Publisher publisher) {
         return repository
                 .getAll()
                 .stream()
