@@ -2,37 +2,29 @@ package br.edu.ifce.lp2.ecommercerbook.model.services;
 
 import br.edu.ifce.lp2.ecommercerbook.model.entities.Publisher;
 import br.edu.ifce.lp2.ecommercerbook.model.repository.PublisherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Collection;
-import java.util.Locale;
-
+@Service
 public class PublisherService {
-
-    private static PublisherRepository repository = new PublisherRepository();
+    @Autowired
+    private PublisherRepository repository;
 
     public void create(Publisher publisher){
-        var allPublishers = repository.getAll();
-        if(!isExists(publisher)){repository.create(publisher);}
-    }
-////te
-    private boolean isExists(Publisher publisher) {
-        return repository
-                .getAll()
-                .stream()
-                .anyMatch(p -> p
-                        .getName()
-                        .toLowerCase()
-                        .equals(publisher
-                                .getName()));
+        var allPublishers = repository.findAll();
+        if(!repository.existsByName(publisher.getName())){repository.save(publisher);}
     }
 
-    public void update(Long id, Publisher publisher){
+
+    public void update(String id, Publisher publisher){
         var canUpdate  = this.getById(id) != null;
         if(canUpdate){
-            if(!isExists(publisher)){repository.update(id, publisher);}}}
+            if(!repository.existsByName(publisher.getName())){repository.save(publisher);}}}
 
-    public Collection<Publisher> getAll() {return repository.getAll();}
+    public Collection<Publisher> getAll() {return repository.findAll();}
 
-    public Publisher getById(Long id) {return repository.getById(id);}
+    public Publisher getById(String id) {return repository.findById(id).orElse(new Publisher());}
 
-    public void delete(Long id) {repository.delete(id);}
+    public void delete(String id) {repository.deleteById(id);}
 }
