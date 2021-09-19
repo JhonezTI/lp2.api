@@ -7,4 +7,5 @@ public interface PublisherRepository extends MongoRepository<Publisher, String> 
 
 
     boolean existsByName(String name);
+    Publisher findByName(String name);
 }
